@@ -1,0 +1,904 @@
+/* ============================================================================
+   StockFlow Pro — Apple Store Design Overhaul  v9.7.3
+   Web Designer Sênior · Padrão Apple HIG / SF Symbols / iOS 17
+   
+   PRINCÍPIOS:
+   · Botões com texto em Title Case — Apple nunca usa ALL CAPS em ações
+   · Toque mínimo de 44pt em todos os alvos interativos
+   · Escala tipográfica rigorosa: body 15px, label 11px, caption 10px
+   · Padding horizontal mínimo 16px em toda a UI
+   · Hierarquia visual por glass surfaces, não por cor excessiva
+   · Ícones SVG puros — sem emojis em pseudo-elementos de botão
+   · Agrupamento semântico de ações (primary / secondary / destructive)
+   ============================================================================ */
+
+/* ── 1. LAYOUT BASE ─────────────────────────────────────────────────────── */
+body {
+  padding: 8px 16px 100px;
+}
+
+/* ── 2. CABEÇALHO ───────────────────────────────────────────────────────── */
+.header-container {
+  padding: 15px 18px;
+  margin: 6px 0 18px;
+  border-radius: var(--radius-xl);
+}
+
+h1 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.btn-theme {
+  padding: 7px 12px;
+  gap: 6px;
+  border-radius: var(--radius-full);
+}
+
+.btn-theme-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.btn-calendario {
+  padding: 9px;
+}
+
+/* ── 3. ABAS DE NAVEGAÇÃO — Apple tab bar ───────────────────────────────── */
+.nav-tabs {
+  border-radius: var(--radius-xl);
+  padding: 5px;
+  gap: 3px;
+  margin: 0 0 20px;
+}
+
+.nav-tab {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 4px 9px;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.15px;
+  text-transform: none;           /* Apple HIG: tab labels não são uppercase */
+  border-radius: var(--radius-lg);
+  min-height: 56px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: block;
+  opacity: 0.55;
+  transition: opacity 0.2s;
+}
+
+.nav-tab.active .tab-icon,
+.nav-tab:hover .tab-icon {
+  opacity: 1;
+}
+
+.nav-tab.active {
+  font-size: 9.5px;
+  font-weight: 700;
+}
+
+.tab-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.05px;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* ── 4. BOTÃO BASE — remover uppercase global ───────────────────────────── */
+button {
+  text-transform: none;            /* Remove uppercase em TODOS os botões */
+  letter-spacing: 0px;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 15px 18px;
+  border-radius: var(--radius-md);
+  gap: 8px;
+}
+
+/* Remove emojis dos pseudo-elementos (substituídos por SVG na sessão anterior) */
+#add-star-btn::before,
+#remove-star-btn::before,
+#btn-compartilhar-estoque::before,
+#btn-copiar-estoque::before,
+#btn-compartilhar-compras::before,
+#btn-copiar-compras::before,
+#btn-novo-dia::before,
+#btn-exportar::before,
+#btn-importar::before,
+#btn-reset::before { content: none !important; }
+
+/* ── 5. SEÇÃO ESTOQUE — Botões de ação ──────────────────────────────────── */
+/* Toggle lista */
+#btn-toggle-lista {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  margin-bottom: 16px;
+}
+
+/* PRIMÁRIA: verde — ação principal de "novo dia" */
+#btn-novo-dia {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  padding: 18px 22px;
+  border-radius: var(--radius-lg);
+  margin-top: 28px;
+  box-shadow: 0 6px 24px rgba(50, 215, 75, 0.30), var(--inner-glow);
+}
+
+/* SECUNDÁRIA: exportar / importar — visualmente irmãos */
+#btn-exportar {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+  padding: 16px 20px;
+  margin-top: 12px;
+  border-radius: var(--radius-md);
+}
+
+#btn-importar {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+  padding: 16px 20px;
+  margin-top: 10px;
+  border-radius: var(--radius-md);
+}
+
+/* DESTRUTIVA: reset — separada visualmente */
+#btn-reset {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  padding: 15px 20px;
+  margin-top: 28px;
+  border-radius: var(--radius-md);
+}
+
+/* Grupo Share — botões lado a lado */
+.share-group {
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.share-group--spaced {
+  margin-bottom: 0;
+}
+
+.btn-zap {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+  padding: 15px 12px;
+  border-radius: var(--radius-md);
+  gap: 7px;
+}
+
+.btn-compra {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  padding: 15px 12px;
+  border-radius: var(--radius-md);
+  gap: 7px;
+}
+
+/* ── 6. SEÇÃO ADICIONAR ──────────────────────────────────────────────────── */
+.action-group {
+  margin-top: 20px;
+  gap: 8px;
+}
+
+.btn-half {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0;
+  padding: 15px 10px;
+  border-radius: var(--radius-md);
+  flex: 1;
+  gap: 6px;
+}
+
+#add-btn {
+  background: var(--accent-primary);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 16px var(--accent-glow), var(--inner-glow);
+}
+
+#add-btn:hover:not(:active) {
+  background: var(--accent-hover);
+}
+
+/* ── 7. SEÇÃO COMPRAS ────────────────────────────────────────────────────── */
+#area-compras {
+  margin-top: 0;
+  border-radius: var(--radius-xl);
+  padding: 20px 18px;
+}
+
+#titulo-compras {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+}
+
+#lista-compras-visual li {
+  padding: 13px 0;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+/* ── 8. TABELA DE ESTOQUE ────────────────────────────────────────────────── */
+.table-wrapper {
+  border-radius: var(--radius-lg);
+  margin-bottom: 20px;
+}
+
+th {
+  padding: 13px 10px;
+  font-size: 10px;
+  letter-spacing: 0.6px;
+}
+
+td {
+  padding: 14px 10px;
+  font-size: 15px;
+}
+
+.categoria-header {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  padding: 10px 12px;
+}
+
+.filtro-itens-bar {
+  padding: 11px 14px;
+  border-radius: var(--radius-md);
+  margin-bottom: 14px;
+  gap: 10px;
+}
+
+.filtro-itens-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: none;  /* Item, não ITEM */
+}
+
+/* ── 9. CARDS ────────────────────────────────────────────────────────────── */
+.card {
+  padding: 20px 18px;
+  border-radius: var(--radius-xl);
+  margin-bottom: 16px;
+}
+
+/* ── 10. MODAIS ──────────────────────────────────────────────────────────── */
+.modal-overlay {
+  padding: 24px;
+}
+
+.modal-box {
+  border-radius: var(--radius-xl);
+  padding: 28px 24px;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.modal-header-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.2px;
+}
+
+#modal-text {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 26px;
+  line-height: 1.55;
+}
+
+.modal-buttons {
+  gap: 12px;
+}
+
+.modal-buttons button {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+  padding: 15px;
+  border-radius: var(--radius-md);
+}
+
+.modal-field { margin-bottom: 16px; }
+
+.modal-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 8px;
+}
+
+.modal-btn-confirmar {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0;
+  padding: 15px;
+}
+
+.btn-salvar-alerta {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0;
+  padding: 15px 20px;
+  border-radius: var(--radius-md);
+}
+
+.btn-cancelar-alerta {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+  padding: 15px 20px;
+  border-radius: var(--radius-md);
+}
+
+.fechar-whatsnew-ok {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+  padding: 13px 36px;
+  border-radius: var(--radius-full);
+}
+
+.btn-fechar-changelog {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+  padding: 13px 36px;
+  border-radius: var(--radius-full);
+}
+
+/* ── 11. CALCULADORA ─────────────────────────────────────────────────────── */
+.calc-box {
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  gap: 16px;
+}
+
+.calc-header {
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+#calc-display, #lf-calc-display {
+  font-size: 34px;
+  padding: 16px 18px;
+  border-radius: var(--radius-sm);
+  min-height: 76px;
+}
+
+.calc-grid { gap: 9px; }
+
+.calc-btn {
+  font-size: 20px;
+  padding: 16px 0;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.calc-bg-op {
+  font-size: 20px;
+}
+
+.calc-bg-confirm {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+#calc-btn-teclado {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  text-transform: none;
+}
+
+/* ── 12. LISTA FÁCIL ─────────────────────────────────────────────────────── */
+.lf-gauge-section {
+  padding: 16px 0 20px;
+  border-radius: var(--radius-xl);
+  margin-bottom: 16px;
+}
+
+.lf-gauge-title {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.lf-gauge-num-label {
+  font-size: 9.5px;
+  letter-spacing: 0.4px;
+}
+
+.lf-gauge-num-value {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.lf-tab-bar {
+  border-radius: var(--radius-full);
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+.lf-tab-btn {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+  text-transform: none;    /* Apple: tab labels não são uppercase */
+  padding: 11px 8px;
+  gap: 5px;
+  border-radius: var(--radius-full);
+}
+
+.lf-global-actions {
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.lf-global-btn {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 12px 6px;
+  border-radius: var(--radius-full);
+  gap: 5px;
+}
+
+.lf-share-btn {
+  padding: 15px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  border-radius: var(--radius-full);
+  margin-top: 10px;
+  gap: 8px;
+}
+
+.lf-footer-totals {
+  padding: 18px 22px;
+  border-radius: var(--radius-xl);
+  margin: 20px 0 14px;
+}
+
+.lf-footer-label {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.lf-footer-number {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* Comparador */
+.lf-btn-calcular {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 16px 22px;
+  border-radius: var(--radius-full);
+}
+
+.lf-comparador-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.1px;
+}
+
+.lf-product-header {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.lf-version-link {
+  font-size: 11px;
+  color: var(--text-soft);
+  text-decoration: none;
+  opacity: 0.7;
+  padding: 10px;
+  gap: 4px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Toolbar histórico */
+.lf-hist-busca {
+  font-size: 14px;
+  padding: 11px 16px;
+  border-radius: var(--radius-sm);
+}
+
+.lf-hist-limpar-tudo-btn {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+  padding: 9px 14px;
+  border-radius: var(--radius-sm);
+  text-transform: none;
+}
+
+.lf-hist-card {
+  border-radius: 18px;
+  padding: 16px 15px 12px;
+}
+
+.lf-hist-nome {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.lf-hist-valor {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.lf-hist-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* ── 13. BOTÕES FLUTUANTES ────────────────────────────────────────────────── */
+.btn-nav {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  box-shadow:
+    0 4px 18px rgba(0,0,0,0.50),
+    0 1px 0 rgba(255,255,255,0.08) inset;
+}
+
+/* FAB Lista Fácil */
+#lf-fabAddItem {
+  width: 58px;
+  height: 58px;
+  border-radius: 29px;
+  bottom: 24px;
+  right: 20px;
+}
+
+/* ── 14. TOAST ───────────────────────────────────────────────────────────── */
+.toast {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 14px 24px;
+  border-radius: var(--radius-full);
+}
+
+/* ── 15. INPUTS ──────────────────────────────────────────────────────────── */
+input[type='text'],
+input[type='number'],
+select {
+  padding: 14px 16px;
+  font-size: 16px;
+  border-radius: var(--radius-sm);
+}
+
+input[type='text']:focus,
+input[type='number']:focus,
+select:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.55px;
+  margin-bottom: 8px;
+}
+
+/* ── 16. AUTOSAVE CHIP ───────────────────────────────────────────────────── */
+#autosave-chip {
+  padding: 9px 16px 9px 12px;
+}
+
+.chip-text {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1px;
+}
+
+/* ── 17. CALENDÁRIO POPUP ────────────────────────────────────────────────── */
+.calendario-popup {
+  border-radius: var(--radius-xl);
+  padding: 20px 18px 16px;
+}
+
+.cal-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.1px;
+}
+
+.cal-hint {
+  font-size: 10px;
+  font-weight: 500;
+  margin-top: 14px;
+}
+
+/* ── 18. MASSA SECTION ───────────────────────────────────────────────────── */
+.massa-hero-card {
+  border-radius: var(--radius-xl);
+  padding: 22px 22px 20px;
+}
+
+.massa-input-card {
+  border-radius: var(--radius-xl);
+  padding: 22px 22px;
+}
+
+.massa-edit-panel {
+  border-radius: var(--radius-xl);
+  padding: 22px 22px 18px;
+}
+
+.massa-title {
+  font-size: 22px !important;
+  letter-spacing: -0.5px;
+}
+
+.massa-toggle-btn {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 14px 20px;
+  border-radius: var(--radius-full);
+  margin-bottom: 14px;
+}
+
+/* ── 19. STATUS SAVE ─────────────────────────────────────────────────────── */
+#status-save {
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+/* ── 20. SCROLL BUTTONS POSIÇÃO ──────────────────────────────────────────── */
+.nav-float {
+  left: 14px;
+  bottom: 24px;
+  gap: 8px;
+}
+
+/* ── 21. PWA BANNER ──────────────────────────────────────────────────────── */
+.pwa-banner-text strong { font-size: 13px; }
+.pwa-banner-text small  { font-size: 11px; }
+
+.pwa-banner-install {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 9px 16px;
+}
+
+/* ── 22. WHAT'S NEW MODAL ────────────────────────────────────────────────── */
+#whatsnew-content {
+  font-size: 14px;
+  line-height: 1.65;
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+}
+
+/* ── 23. SEARCH OVERLAY ──────────────────────────────────────────────────── */
+#search-overlay {
+  border-radius: var(--radius-xl);
+  padding: 18px;
+}
+
+.search-inner { gap: 10px; }
+
+/* ── 24. SWIPE BUTTONS ───────────────────────────────────────────────────── */
+.swipe-btn {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  text-transform: none;
+}
+
+/* ── 25. MICROTIPOGRAFIA GERAL ───────────────────────────────────────────── */
+
+/* Categoria header da tabela: só uppercase em labels estruturais */
+.categoria-header {
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-size: 10px;
+}
+
+/* Seção de filtro: remove uppercase do label "Item" */
+.filtro-itens-label {
+  text-transform: none;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--text-soft);
+}
+
+/* Compras: share group */
+.share-group .btn-compra,
+.share-group .btn-zap {
+  text-transform: none;
+}
+
+/* ── 26. REFINAMENTOS DE COR E SOMBRA ─────────────────────────────────────── */
+
+/* btn-exportar: azul sem glow excessivo */
+#btn-exportar {
+  box-shadow: 0 4px 18px var(--accent-glow), var(--inner-glow);
+}
+
+/* btn-importar: roxo */
+#btn-importar {
+  box-shadow: 0 4px 16px rgba(191,90,242,0.22), var(--inner-glow);
+}
+
+/* btn-reset: sem sombra — destrutivo subtil */
+#btn-reset {
+  box-shadow: none !important;
+}
+
+#btn-reset:active {
+  background: rgba(255,69,58,0.08) !important;
+}
+
+/* ── 27. REFINAMENTO CALC BOX BTN-HALF ───────────────────────────────────── */
+.btn-half.btn-calc-teclado {
+  text-transform: none;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* ── 28. LUPA FLUTUANTE ──────────────────────────────────────────────────── */
+#assistive-touch {
+  width: 54px;
+  height: 54px;
+}
+
+#assistive-touch svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ── 29. MODAL BACKDROP mais escuro para melhor foco ─────────────────────── */
+.modal-overlay {
+  background: rgba(0,0,0,0.62);
+}
+
+/* ── 30. SEPARADOR VISUAL ENTRE GRUPOS DE BOTÕES (Estoque) ──────────────── */
+/* Cria linha separadora entre grupo exportar/importar e btn-reset */
+#btn-reset {
+  position: relative;
+  margin-top: 32px;
+}
+
+#btn-reset::before {
+  content: '' !important;           /* override do emoji rule */
+  display: block;
+  position: absolute;
+  top: -18px;
+  left: 20%;
+  width: 60%;
+  height: 1px;
+  background: var(--border);
+  border-radius: 1px;
+}
+
+/* ── 31. INDICATOR PILL ATIVO NAS ABAS ───────────────────────────────────── */
+.nav-tab.active {
+  box-shadow: 0 4px 20px var(--accent-glow), 0 0 0 1px rgba(255,255,255,0.14) inset;
+}
+
+/* Abas inativas: hover com fundo sutil */
+.nav-tab:not(.active):hover {
+  background: rgba(255,255,255,0.06);
+}
+
+body.theme-arctic .nav-tab:not(.active):hover,
+body.light-mode   .nav-tab:not(.active):hover {
+  background: rgba(0,0,0,0.05);
+}
+
+/* ── 32. REFINAMENTO TABELA LISTA FÁCIL ──────────────────────────────────── */
+.lf-item-card {
+  padding: 12px 14px 12px;
+}
+
+.lf-nome-editavel {
+  font-size: 15px;
+  font-weight: 500;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+
+.lf-field-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.lf-preco-input,
+.lf-qtd-input {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 9px 10px;
+  border-radius: var(--radius-xs);
+}
+
+.lf-total-cell {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* ── 33. TEMA ARCTIC OVERRIDES ───────────────────────────────────────────── */
+body.theme-arctic .nav-tab.active,
+body.light-mode   .nav-tab.active {
+  box-shadow: 0 4px 18px rgba(0,122,255,0.22), 0 0 0 1px rgba(255,255,255,0.8) inset;
+}
+
+/* ── 34. ANIMAÇÕES: mais suaves e rápidas ────────────────────────────────── */
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+button:active {
+  transform: scale(0.96);
+  transition: transform 0.08s var(--ease-out);
+}
